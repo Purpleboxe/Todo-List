@@ -8,11 +8,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1 class="logo">Todo-List</h1>
-    </header>
+    <div id="main">
+        <div id="sidebar">
+            <h1 class="logo">Todo List</h1>
 
-    <div id="main"></div>
+            <div class="projects">
+                <div class="project-header">
+                    Projects
+                </div>
+            </div>
+
+            <button id="addProjectBtn">+ New Project</button>
+        </div>
+        
+        <div id="addProject" class="">
+            <form id="addProjectForm">
+                <input type="text" class="input" id="name" placeholder="Name your project">
+                <button class="project-sumbit-btn">Sumbit</button>
+            </form>
+        </div>
+        <div class="overlay"></div>
+
+        <div id="body">
+            
+        </div>
+    </div>
 
     <script src="main.js"></script>
 </body>
