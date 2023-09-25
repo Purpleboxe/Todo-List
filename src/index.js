@@ -1,7 +1,3 @@
-import {createProject, eventListeners} from './modules/projectLogic';
-
-const allProjects = [];
-const projects = document.querySelector('.projects');
+import {eventListeners} from './modules/projectLogic';
 
 eventListeners();
-createProject(projects, 'Default');
