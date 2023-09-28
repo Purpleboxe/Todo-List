@@ -2,6 +2,7 @@ import project from './project.js';
 
 const allProjects = [];
 const projects = document.querySelector('.projects');
+const body = document.getElementById('body');
 
 function createProject(project) {
     const newProject = document.createElement('div');
@@ -17,6 +18,24 @@ function createProject(project) {
     projectName.innerText = project.name;
     newProject.appendChild(projectName);
 
+    newProject.addEventListener('click', () => {
+        setActiveButton(newProject);
+        body.innerHTML = `
+        <div class="top">
+        <h3>${project.name}</h3>
+        </div>
+        `;
+
+        const top = document.querySelector('.top');
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('projectDelete');
+        deleteBtn.innerText = 'Delete';
+        top.appendChild(deleteBtn);
+        deleteBtn.addEventListener('click', () => {
+            removeProject(project);
+        })
+    });
+
     projects.appendChild(newProject);
 }
 
@@ -31,6 +50,12 @@ function renderProjects() {
 
 function addProject(project) {
     allProjects.push(project);
+    renderProjects();
+}
+
+function removeProject(project) {
+    body.innerHTML = ``;
+    allProjects.splice(allProjects.indexOf(project), 1);
     renderProjects();
 }
 
@@ -50,11 +75,23 @@ const eventListeners = () => {
         } else {
             const newProject = new project(name);
             addProject(newProject);
-    
+            
             closeProjectForm();
             console.log(allProjects);
         }
     }
+}
+
+function setActiveButton(button) {
+    const buttons = document.querySelectorAll('.project');
+
+    buttons.forEach((button) => {
+        if (button !== this) {
+            button.classList.remove('selected');
+        }
+    });
+
+    button.classList.add('selected');
 }
 
 const openProjectForm = () => {
