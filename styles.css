@@ -82,6 +82,10 @@ body {
     cursor: pointer;
 }
 
+.selected {
+    background-color: var(--hover);
+}
+
 /* Add Project */
 
 .overlay {
@@ -106,7 +110,7 @@ body {
     transform: translate(-50%, -50%) scale(0);
     width: 600px;
     height: 200px;
-    padding: 2rem;
+    padding: 1.5rem;
     background-color: white;
     border-radius: 10px;
     text-align: center;
@@ -158,4 +162,28 @@ body {
 #body {
     margin: 7rem;
     font-size: 2rem;
+    width: auto;
+}
+
+.top {
+    width: 60vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.projectDelete {
+    background-color: #DF2935;
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.1s;
+}
+
+.projectDelete:hover {
+    background-color: #e1545d;
 }
