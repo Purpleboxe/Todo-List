@@ -1,8 +1,27 @@
 import project from './project.js';
+import {taskEventListeners, renderTasks} from './taskLogic.js';
 
 const allProjects = [];
 const projects = document.querySelector('.projects');
 const body = document.getElementById('body');
+const overlay = document.querySelector('.overlay');
+
+function saveProjects() {
+    localStorage.setItem('projects', JSON.stringify(allProjects));
+}
+
+function restoreProjects(allProjects) {
+    const projects = JSON.parse(localStorage.getItem('projects'));
+    if (projects) {
+        allProjects = projects.map((project) => {
+            allProjects.push(project);
+        });
+    } {
+        allProjects = [];
+    }
+
+    renderProjects();
+}
 
 function createProject(project) {
     const newProject = document.createElement('div');
@@ -20,23 +39,38 @@ function createProject(project) {
 
     newProject.addEventListener('click', () => {
         setActiveButton(newProject);
-        body.innerHTML = `
-        <div class="top">
-        <h3>${project.name}</h3>
-        </div>
-        `;
-
-        const top = document.querySelector('.top');
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('projectDelete');
-        deleteBtn.innerText = 'Delete';
-        top.appendChild(deleteBtn);
-        deleteBtn.addEventListener('click', () => {
-            removeProject(project);
-        })
+        renderBody(project, project.name);
     });
 
     projects.appendChild(newProject);
+}
+
+function renderBody(project, name) {
+    body.innerHTML = `
+    <div class="top">
+    <h2>${name}</h2>
+    </div>
+    <div class="divider"></div>
+    <div id="allTasks"></div>
+    <button id="addTaskBtn">+ New Task</button>
+    `;
+
+    const top = document.querySelector('.top');
+    const deleteBtn = document.createElement('button');
+    
+    deleteBtn.classList.add('projectDelete');
+    deleteBtn.innerText = 'Delete';
+    top.appendChild(deleteBtn);
+    deleteBtn.addEventListener('click', () => {
+        removeProject(project);
+    });
+
+    taskEventListeners();
+
+    const id = document.querySelector('.selected').id;
+    const currentProject = allProjects[id];
+
+    renderTasks(currentProject);
 }
 
 function renderProjects() {
@@ -51,29 +85,31 @@ function renderProjects() {
 function addProject(project) {
     allProjects.push(project);
     renderProjects();
+    saveProjects();
 }
 
 function removeProject(project) {
     body.innerHTML = ``;
     allProjects.splice(allProjects.indexOf(project), 1);
     renderProjects();
+    saveProjects();
 }
 
 const eventListeners = () => {
     const addProjectBtn = document.getElementById('addProjectBtn');
     addProjectBtn.addEventListener('click', openProjectForm);
 
-    const overlay = document.querySelector('.overlay');
     overlay.addEventListener('click', closeProjectForm);
 
     const addProjectForm = document.getElementById('addProjectForm');
     addProjectForm.onsubmit = (e) => {
         e.preventDefault();
-        const name = e.target['name'].value;
-        if (name == '') {
-            alert('Name cannot be empty!');
+        const name = e.target['projectName'].value;
+        if (name.trim().length === 0) {
+            alert('Name can not be empty!');
         } else {
             const newProject = new project(name);
+
             addProject(newProject);
             
             closeProjectForm();
@@ -96,8 +132,7 @@ function setActiveButton(button) {
 
 const openProjectForm = () => {
     const addProject = document.getElementById('addProject');
-    const overlay = document.querySelector('.overlay');
-    const name = document.getElementById('name');
+    const name = document.getElementById('projectName');
 
     addProject.classList.add('active');
     overlay.classList.add('active');
@@ -107,10 +142,9 @@ const openProjectForm = () => {
 
 const closeProjectForm = () => {
     const addProject = document.getElementById('addProject');
-    const overlay = document.querySelector('.overlay');
-
+    
     addProject.classList.remove('active');
     overlay.classList.remove('active');
 }
 
-export {eventListeners};
+export {eventListeners, allProjects, saveProjects, restoreProjects};

@@ -16,6 +16,7 @@
                 <div class="project-header">
                     Projects
                 </div>
+                <div class="divider"></div>
             </div>
 
             <button id="addProjectBtn">+ New Project</button>
@@ -23,8 +24,19 @@
         
         <div id="addProject" class="">
             <form id="addProjectForm" action="">
-                <input type="text" class="input" id="name" placeholder="Name your project" maxlength="30">
-                <button class="project-sumbit-btn">Sumbit</button>
+                <input type="text" class="input" id="projectName" placeholder="Name your project" maxlength="30">
+                <button class="sumbit-btn">Sumbit</button>
+            </form>
+        </div>
+        <div id="addTask" class="">
+            <form id="addTaskForm" action="">
+                <input type="text" class="input" id="taskName" placeholder="Name your task" maxlength="40">
+                <input type="text" class="input" id="taskDescription" placeholder="Task Description" maxlength="50">
+                <div class="date">
+                    <label for="taskDate">Date</label>
+                    <input type="date" id="taskDate" class="input">
+                </div>
+                <button class="sumbit-btn">Sumbit</button>
             </form>
         </div>
         <div class="overlay"></div>
