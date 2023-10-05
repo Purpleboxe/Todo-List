@@ -269,3 +269,7 @@ body {
     transform: scale(1.1);
     cursor: pointer;
 }
+
+.taskDate {
+    margin-right: 20px;
+}
