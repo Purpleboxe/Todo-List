@@ -48,10 +48,8 @@ function createTask(task, tasks) {
         projectLogic.saveProjects();
     });
     const date = document.createElement('div');
-    date.classList.add('date');
+    date.classList.add('taskDate');
     date.innerText = task.date;
-    const editBtn = document.createElement('div');
-    editBtn.classList.add('editBtn');
 
     leftSide.appendChild(check);
     leftSide.appendChild(taskDetails);
@@ -59,7 +57,6 @@ function createTask(task, tasks) {
     taskDetails.appendChild(taskDescription);
     newTask.appendChild(leftSide);
     rightSide.appendChild(date);
-    rightSide.appendChild(editBtn);
     newTask.appendChild(rightSide);
     allTasks.appendChild(newTask);
 }
