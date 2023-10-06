@@ -254,22 +254,6 @@ body {
     align-items: center;
 }
 
-.editBtn {
-    height: 30px;
-    width: 30px;
-    background-image: url(images/square-edit-outline.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 5px;
-    margin: 0px 10px;
-    transition: 0.1s ease-in-out;
-}
-
-.editBtn:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-}
-
 .taskDate {
     margin-right: 20px;
 }
