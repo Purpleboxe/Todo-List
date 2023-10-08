@@ -13,7 +13,7 @@ function saveProjects() {
 function restoreProjects(allProjects) {
     const projects = JSON.parse(localStorage.getItem('projects'));
     if (projects) {
-        allProjects = projects.map((project) => {
+        projects.map((project) => {
             allProjects.push(project);
         });
     } {
